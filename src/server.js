@@ -1,6 +1,10 @@
 import path from 'path';
 import { Server } from 'http';
 import Express from 'express';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+import { App } from './components/App';
 
 const app = new Express();
 const server = new Server(app);
@@ -8,10 +12,17 @@ const server = new Server(app);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
-app.get('*', (req, res) => {
-  let body = 'Test Content text';
-  let status = 200;
+app.use(Express.static(path.join(__dirname, 'static')));
 
+app.get('*', (req, res) => {
+  let body = '';
+  let status = 200;
+  const context = {};
+  body = renderToString(
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>,
+  );
   return res.status(status).render('index', { body });
 });
 
