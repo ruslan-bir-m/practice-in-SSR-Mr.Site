@@ -23,6 +23,9 @@ app.get('*', (req, res) => {
       <App />
     </StaticRouter>,
   );
+  if (context.err404) {
+    status = 404;
+  }
   return res.status(status).render('index', { body });
 });
 

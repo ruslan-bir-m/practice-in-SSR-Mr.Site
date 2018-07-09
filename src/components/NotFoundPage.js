@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export class NotFoundPage extends Component {
+  componentWillMount() {
+    const { staticContext } = this.props;
+    if (staticContext) {
+      staticContext.err404 = true;
+    }
+  }
   render() {
     return (
       <div>
