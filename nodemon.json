@@ -1,0 +1,10 @@
+{
+	"verbose": true,
+	"exec": "webpack -d && babel-node {{filename}}",
+	"watch": "src",
+	"ext": "js",
+	"env": {
+    "NODE_ENV": "development"
+  },
+	"ignore": ["src/static/js/bundle.js", "src/server-prod.js"]
+}
