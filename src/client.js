@@ -1,14 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { App } from './components/App';
+import {render} from 'react-dom';
+import Root from './components/Root';
 
-const AppClient = () => (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
-
-window.onload = () => {
-  render(<AppClient />, document.getElementById('main'));
-};
+render(<Root />, document.getElementById('main'));

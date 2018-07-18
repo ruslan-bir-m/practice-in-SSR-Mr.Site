@@ -6,6 +6,9 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { App } from './components/App';
 
+import {Provider} from 'react-redux';
+import store from './store';
+
 const app = new Express();
 const server = new Server(app);
 
@@ -19,9 +22,11 @@ app.get('*', (req, res) => {
   let status = 200;
   const context = {};
   body = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <App />
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <App />
+      </StaticRouter>
+    </Provider>,
   );
   if (context.err404) {
     status = 404;
