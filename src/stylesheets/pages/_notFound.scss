@@ -1,0 +1,16 @@
+h2, p {
+    text-align: center;
+}
+h2 {
+    color: #444;
+    margin-bottom: 1rem;
+}
+a {
+    color: $mainColor;
+}
+p {
+    margin-bottom: 1rem;
+    img {
+        width: 300px;;
+    }
+}

@@ -9,12 +9,12 @@ import BankDetail from './BankDetail';
 
 export const App = () => (
   <div>
-    <header>
-      <NavLink activeStyle = {{color: 'red'}} to="/main">Main</NavLink>
-      <NavLink activeStyle = {{color: 'red'}} to="/page-1">Page 1</NavLink>
-      <NavLink activeStyle = {{color: 'red'}} to="/page-2">Page 2</NavLink>
-      <NavLink activeStyle = {{color: 'red'}} to="/page-3">Page 3 (not found)</NavLink>
-      <NavLink activeStyle = {{color: 'red'}} to="/bank">Exchange rates</NavLink>
+    <header className="nav">
+      <NavLink activeClassName = "active" to="/main">Main</NavLink>
+      <NavLink activeClassName = "active" to="/page-1">Page 1</NavLink>
+      <NavLink activeClassName = "active" to="/page-2">Page 2</NavLink>
+      <NavLink activeClassName = "active" to="/page-3">Page 3 (not found)</NavLink>
+      <NavLink activeClassName = "active" to="/bank">Exchange rates</NavLink>
     </header>
     <Switch>
       <Route exact path="/main" component={IndexPage} />

@@ -13,6 +13,7 @@ export class NotFoundPage extends Component {
       <div>
         <h1>404</h1>
         <h2>Page not found!</h2>
+        <p><img src="img/404.jpg" alt="error-404" /></p>
         <p>
           <NavLink to="/main">Main</NavLink>
         </p>

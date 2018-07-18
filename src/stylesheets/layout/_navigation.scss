@@ -1,0 +1,16 @@
+a {
+    color: $mainColor;
+    text-decoration: none;
+    padding: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: $mainColor;
+        color: white;
+    }
+    &.active {
+        font-weight: bold;
+        background-color: $mainColor;
+        color: white;
+    }
+}
