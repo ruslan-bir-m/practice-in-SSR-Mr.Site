@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loadCurrencyById } from '../action-creator';
 
 export class BankDetail extends Component {
+  static propTypes = {
+    currItem: PropTypes.object,
+    loadCurrencyById: PropTypes.func.isRequired
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      currency: {}
-    };
-  }
   componentDidMount() {
-    fetch(`https://cors-anywhere.herokuapp.com/http://www.nbrb.by/API/ExRates/Rates/${this.props.match.params.id}`)
-      .then(res => res.json())
-      .then(data => {
-        let currency = data;
-        this.setState({ currency });
-      })
-      .catch(err => console.error(err))
+    const { loadCurrencyById, match: { params: {id}} } = this.props;
+    loadCurrencyById(id);
   }
   render() {
+    const { currItem } = this.props;
     return (
       <div>
-        <h1>{this.state.currency.Cur_Name}</h1>
-        <p>{this.state.currency.Date} - {this.state.currency.Cur_OfficialRate}р.</p>
+        <h1>{currItem.Cur_Name}</h1>
+        <p>{currItem.Date} - {currItem.Cur_OfficialRate}р.</p>
       </div>
     );
   }
 }
+
+export default connect((state) => ({
+  currItem: state.currency
+}), { loadCurrencyById })(BankDetail);

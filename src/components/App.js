@@ -5,7 +5,7 @@ import { Page1 } from './Page1';
 import { Page2 } from './Page2';
 import { NotFoundPage } from './NotFoundPage';
 import Bank from './Bank';
-import { BankDetail } from './BankDetail';
+import BankDetail from './BankDetail';
 
 export const App = () => (
   <div>
