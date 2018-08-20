@@ -1,25 +1,33 @@
+import {
+    LOAD_ALL_CURRENCIES,
+    LOAD_CURRENCY_BY_ID,
+    LOAD_LOCATION_SEARCH,
+    LOAD_WEATHER_LOCATION,
+    START, SUCCESS, FAIL
+} from './../constants'
+
 export function loadAllCurrencies() {
     return {
-        type: 'LOAD_ALL_CURRENCIES',
+        type: LOAD_ALL_CURRENCIES,
         callAPI: 'http://www.nbrb.by/API/ExRates/Currencies'
     }
 }
 
 export function loadCurrencyById(id) {
     return {
-        type: 'LOAD_CURRENCY_BY_ID',
+        type: LOAD_CURRENCY_BY_ID,
         callAPI: 'https://cors-anywhere.herokuapp.com/http://www.nbrb.by/API/ExRates/Rates/'+id
     }
 }
 export function loadLocationSearch(str) {
     return {
-        type: 'LOAD_LOCATION_SEARCH',
+        type: LOAD_LOCATION_SEARCH,
         callAPI: 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query='+str
     }
 }
 export function loadWeatherLocation(id) {
     return {
-        type: 'LOAD_WEATHER_LOCATION',
+        type: LOAD_WEATHER_LOCATION,
         callAPI: `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${id}/`
     }
 }

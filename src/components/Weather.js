@@ -7,6 +7,8 @@ import { loadLocationSearch } from '../action-creator';
 class Weather extends Component {
   static propTypes = {
     loc: PropTypes.array,
+    loaded: PropTypes.bool,
+    loading: PropTypes.bool,
     loadLocationSearch: PropTypes.func.isRequired
   };
   constructor(props) {
@@ -15,12 +17,12 @@ class Weather extends Component {
       inputValue: ''
     };
     this.timer = undefined;
-    this.testFunction = this.testFunction.bind(this);
+    this.getLocations = this.getLocations.bind(this);
   }
   debounce() {
     return () => {
       this.timer && clearTimeout(this.timer);
-      this.timer = setTimeout(this.testFunction, 1000);
+      this.timer = setTimeout(this.getLocations, 1000);
     }
   }
   
@@ -32,18 +34,19 @@ class Weather extends Component {
   componentDidUpdate(){
     console.log('DID-UPDATE');
   }
-  testFunction(){
+  getLocations(){
     const { loadLocationSearch } = this.props;
     if(this.state.inputValue) loadLocationSearch(this.state.inputValue);
-    console.log('STATE-->',this.state.inputValue);
   }
+
   render() {
-    const { loc } = this.props;
-    const locElems = loc.map(location => <li key={location.woeid}>
+    const { loc, loading, loaded } = this.props;
+    const locElems = !loading ? loc.map(location => <li key={location.woeid}>
       <Link to={"/weather/"+location.woeid} >
         {location.title}
       </Link>
-    </li>);
+    </li>) : <div>Loading...</div>;
+    const isLoaded = loaded ? <span>Loaded</span> : ''
     return (
       <div className="weather-search">
         <h2>Weather</h2>
@@ -51,7 +54,9 @@ class Weather extends Component {
           value={this.state.inputValue}
           onKeyUp={this.debounce()}
           onChange={evt => this.updateInputValue(evt)}
+          placeholder="Enter the place"
         />
+        {isLoaded}
         <ol>
           {locElems}
         </ol>
@@ -61,5 +66,7 @@ class Weather extends Component {
 }
     
 export default connect((state) => ({
-  loc: state.weather
+  loc: state.weather.listPlaces,
+  loading: state.weather.loading,
+  loaded: state.weather.loaded
 }), {loadLocationSearch})(Weather);
